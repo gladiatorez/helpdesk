@@ -1,0 +1,25 @@
+.theme--light.v-data-table tbody tr:not(:last-child) td:not(.v-data-table__mobile-row) {
+    border-bottom: 1px solid #ebedf2
+}
+
+.v-dialog__content {
+    align-items: start;
+}
+
+.v-input--checkbox {
+    .theme--light.v-label {
+        color: rgba(0, 0, 0, 0.78);
+    }
+    .v-input--selection-controls__input {
+        .v-icon {
+            color: rgba(0, 0, 0, 0.78);
+        }
+    }
+}
+
+
+.v-input {
+    &--dense {
+        font-size: 13px;
+    }
+}

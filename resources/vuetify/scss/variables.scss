@@ -1,0 +1,62 @@
+$material-light: (
+    'background': #f2f3f8,
+);
+
+$headings: (
+    'subtitle-2': (
+        'size': .8125rem,
+    ),
+);
+
+// $list-item-dense-title-font-weight: 400;
+$list-item-title-font-size: 0.875rem;
+$list-item-min-height: 40px;
+$list-dense-min-height: 32px;
+
+$icon-size: 21px;
+$icon-size-dense: 18px;
+
+$btn-font-sizes: (
+    'x-small': .625rem,
+    'small': .75rem,
+    'default': 0.8125rem,
+    'large': .875rem,
+    'x-large': 1rem
+);
+
+$fab-icon-sizes: (
+    'x-small': 13,
+    'small': 18,
+    'default': 21,
+    'large': 28,
+    'x-large': 32
+);
+
+$data-table-regular-header-height: 40px;
+$data-table-regular-row-height: 40px;
+$data-table-regular-row-font-size: 13px;
+
+$card-title-font-size: 14px;
+$card-title-font-weight: 700;
+$dialog-card-title-font-size: 16px;
+
+$label-font-size: 13px;
+
+$input-font-size: 14px;
+$text-field-filled-full-width-outlined-slot-min-height: 40px;
+$text-field-filled-full-width-outlined-dense-slot-min-height: 35px;
+$text-field-filled-full-width-outlined-single-line-slot-min-height: 35px;
+$text-field-outlined-label-position-x: 10px;
+$text-field-outlined-dense-label-position-x: 7px;
+$text-field-outlined-label-position-y: -17px;
+$text-field-outlined-dense-label-position-y: -14px;
+$text-field-enclosed-prepend-append-margin-top: 8px;
+$text-field-outlined-append-prepend-outer-margin-top: 8px;
+
+$breadcrumbs-item-font-size: 13px;
+
+$treeview-node-level-width: 21px;
+
+$alert-font-size: 13px;
+
+$treeview-label-font-size: 13px;

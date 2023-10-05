@@ -1,0 +1,44 @@
+// // $color-pack = false
+// // $body-font-family = "Google Sans", Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+// $body-font-family = Roboto, -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"
+
+// $primary = #5867dd;
+// $success = #34bfa3;
+// $warning = #ffb822;
+// $error   = #f4516c;
+
+// @import '../../../../../node_modules/vuetify/src/stylus/main.styl';
+
+// global-border($color_name, $color_value)
+//   .{$color_name}--border
+//     border-color: $color_value !important
+
+// global-border-accent($color_name, $color_value, $color_type)
+//   .{$color_name}--border
+//     &.border--{$color_type}
+//       border-color: $color_value !important
+
+// // Put the loop in a function so it can't leak
+// create-global-borders()
+//   for $color_name, $color_value in $shades
+//     global-border($color_name, $color_value)
+
+//   if ($color-pack)
+//     for $color_name, $color_color in $colors
+//       for $color_type, $color_value in $color_color
+//         if $color_type == 'base'
+//           global-border($color_name, $color_value)
+
+//         else if $color_type != 'shades'
+//           global-border-accent($color_name, $color_value, $color_type)
+
+// create-global-borders()
+
+.ba-0 {
+	border-width: 0;
+}
+.ba-solid-1 {
+	border-width: 1px!important;
+	border-style: solid!important;
+	border-color: #dadce0!important;
+}

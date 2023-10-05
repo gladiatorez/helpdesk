@@ -1,0 +1,54 @@
+.core-snackbar {
+    &--error {
+        &.v-snack {
+            color: #8c1a32;
+            font-size: 13px;
+        }
+        .v-snack__wrapper {
+            background-color: #fbd5dd;
+            box-shadow: none;
+        }
+        .v-snack__content .v-btn.v-btn {
+            color: #8c1a32;
+        }
+    }
+    &--warning {
+        &.v-snack {
+            color: #988142;
+            font-size: 13px;
+        }
+        .v-snack__wrapper {
+            background-color: #fff7e2;
+            box-shadow: none;
+        }
+        .v-snack__content .v-btn.v-btn {
+            color: #988142;
+        }
+    }
+    &--success {
+        &.v-snack {
+            color: #008b70;
+            font-size: 13px;
+        }
+        .v-snack__wrapper {
+            background-color: #ccfaf1;
+            box-shadow: none;
+        }
+        .v-snack__content .v-btn.v-btn {
+            color: #008b70;
+        }
+    }
+    &--info {
+        &.v-snack {
+            color: #004a8b;
+            font-size: 13px;
+        }
+        .v-snack__wrapper {
+            background-color: #cce5fa;
+            box-shadow: none;
+        }
+        .v-snack__content .v-btn.v-btn {
+            color: #004a8b;
+        }
+    }
+}

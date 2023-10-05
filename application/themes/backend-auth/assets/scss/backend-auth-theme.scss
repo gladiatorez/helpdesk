@@ -1,0 +1,37 @@
+@import "includes/variables";
+
+@import "../../../../../node_modules/bootstrap/scss/bootstrap";
+
+html, body, #root {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.login-form {
+	.logo {
+		width: 50%;
+		margin: 0 auto;
+	}
+	.card-header {
+		padding: 0;
+		background-color: #FEFEFF;
+		.icon-separator {
+			padding-left: 15px;
+			padding-right: 15px;
+			border-right: #dddfe2 solid 1px;
+			font-weight: bold;
+			color: $kalla-green;
+		}
+		h5 {
+			padding: 15px 16px;
+			margin-bottom: 0;
+			small {
+				display: block;
+				font-size: 13px;
+				display: block;
+				opacity: .7;
+			}
+		}
+	} 
+}

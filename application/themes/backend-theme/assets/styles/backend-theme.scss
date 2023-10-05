@@ -1,0 +1,100 @@
+@import './scrollbar';
+
+.elevation-base {
+	box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.08)!important;
+}
+
+html {
+	overflow-y: hidden;
+}
+
+.v-application > .v-application--wrap > .v-content {
+	height: calc(100vh);
+    overflow-y: hidden;
+}
+.v-application >.v-application--wrap >.v-content .v-content__wrap {
+	height: 100%;
+    overflow-y: scroll;
+}
+
+.backend-navbar {
+	box-shadow: 0 10px 30px 0 rgba(82,63,105,.08);
+	.v-toolbar__content {
+		// box-shadow: 0px 1px 15px 1px rgba(69,65,78,0.1);
+		border-bottom: 1px solid #eff0f6;
+	}
+	// .v-toolbar__extension {
+	// 	// border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	// }
+	.v-btn__content {
+		.v-icon {
+			&:before {
+				background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, #ad5beb), color-stop(50%, #c678db), color-stop(75%, #da6ea9), to(#e76e92));
+				background: linear-gradient(180deg, #ad5beb 25%, #c678db 50%, #da6ea9 75%, #e76e92 100%);
+				background-clip: text;
+				text-fill-color: transparent;
+				-webkit-background-clip: text;
+				-webkit-text-fill-color: transparent;
+			}
+		}
+	}
+}
+
+.backend-sidemenu {
+	.v-responsive__content {
+		background: rgba(44, 46, 62, 0.9215686274509803);
+	}
+	.v-list-item__icon:first-child {
+		margin-right: 20px;
+		.v-icon {
+			font-size: 18px;
+		}
+	}
+}
+
+.app-page-header {
+	display: flex;
+	box-sizing: border-box;
+	width: 100%;
+	flex-direction: row;
+	align-items: center;
+	white-space: nowrap;
+	> .page-header-title {
+		font-size: 16px;
+		font-weight: 900;
+		padding-right: 25px;
+		border-right: 1px solid #e2e5ec;
+	}
+	.btn-search {
+		.v-badge__badge {
+			top: -5px;
+			right: -8px;
+			height: 16px;
+			width: 16px;
+		}
+	}
+}
+
+.backend-footer {
+	background-color: #ffffff!important;
+	border-top: 1px solid rgba(0, 0, 0, 0.06)!important;
+}
+
+blockquote {
+    font-style: italic;
+	padding: 2px 0;
+	padding-left: 20px;
+	font-family: Georgia, Times, "Times New Roman", serif;
+    border-left: 5px #ccc solid;
+}
+
+.v-card:not(.v-card--flat) {
+	box-shadow: 0 0 13px 0 rgba(82,63,105,.1);
+}
+
+.hover-underline {
+	text-decoration: none;
+	&:hover {
+		text-decoration: underline;
+	}
+}
