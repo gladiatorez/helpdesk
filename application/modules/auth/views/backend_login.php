@@ -50,15 +50,16 @@
           </div>
 
           <div class="form-group row">
-            <div class="col-md-6 mb-md-0 mb-3">
+            <!-- <div class="col-md-6 mb-md-0 mb-3">
               <div class="form-check">
                 <input class="form-check-input" type="checkbox" value="" id="remember-check" name="remember">
                 <label class="form-check-label" for="remember-check">
-                    <?php echo lang('auth::remember_me'); ?>
+                    <?php //echo lang('auth::remember_me'); ?>
                 </label>
               </div>
-            </div>
-            <div class="col-md-6 text-md-right text-left">
+            </div> -->
+            <div class="col-md-6 mb-md-0 mb-3">
+            <!--<div class="col-md-6 text-md-right text-left"> -->
                 <?php echo anchor(BACKEND_URLPREFIX . '/auth/forgotten_password', lang('auth::forgot_password')) ?>
             </div>
           </div>

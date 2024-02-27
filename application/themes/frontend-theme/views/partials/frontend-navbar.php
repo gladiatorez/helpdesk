@@ -38,6 +38,7 @@
         <a href="<?php echo site_url(); ?>" class="d-block" style="text-decoration: none;">
         <?php echo Asset::img('core::logo_kg.png', '', ['style' => 'width:100px;margin-top:10px']); ?>
         </a>
+        
     </div>
 
     <div class="spacer"></div>

@@ -162,7 +162,7 @@ class The_tickets
         return $this->CI->tickets_log_model->insert($data);
     }
 
-    public function requestTicket($dataTicket, $email, $sentEmail = true, $filesCount = 0, $sbu, $phone)
+    public function requestTicket($dataTicket, $email, $sentEmail = true, $filesCount = 0, $sbu, $company_branch_id)
     {
         if (!array_key_exists('subject', $dataTicket) || !array_key_exists('description', $dataTicket) ||
             !array_key_exists('category_id', $dataTicket) || !array_key_exists('category_sub_id', $dataTicket)) {
@@ -189,8 +189,8 @@ class The_tickets
             $this->CI->informer_model->update(['company_id' => $sbu], array('id' => $informer->id));
         }
 
-        if ($phone) {
-            $this->CI->informer_model->update(['phone' => $phone], array('id' => $informer->id));
+        if ($company_branch_id <> 0) {
+            $this->CI->informer_model->update(['company_branch_id' => $company_branch_id], array('id' => $informer->id));
         }
 
         if (empty($informer->company_id) || empty($informer->company_branch_id) || 
@@ -352,7 +352,7 @@ class The_tickets
         $this->notifTelegramToEndUser($insertTicket, 'REQUESTED');
 
         $this->setMessage('ticket_lib_request_success');
-        return $insertTicket;
+        return $insertTicket.'#'.$lasNumber;
     }
 
     public function requestApprove($id, $dataApprove, $note = null)
@@ -1294,6 +1294,7 @@ class The_tickets
             $writer->setIncludeCharts(true);
             $fileName = sprintf('Report_macca_[%s].xlsx', now());
             $writer->save(APPPATH . 'cache/files/' . $fileName);
+            $writer->save($baseUrl.'uploader/report_file/'.$fileName);
 
             $this->setMessage('Generate report success', FALSE);
             return $fileName;

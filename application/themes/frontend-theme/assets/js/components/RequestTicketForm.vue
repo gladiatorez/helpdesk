@@ -23,24 +23,24 @@
 						:disabled="loading"
 						label="SBU"
 						placeholder="Search SBU"
-						v-model="row.sbuid"
+						v-model="row.sbuId"
 						:items="sbuOptions"
 						:error-messages="errorMsg.sbuId"
+						@change="fetchBranch"
 					></v-autocomplete>
-          <v-alert v-if="servicesDescription" color="primary" text :class="{'mt-4': !!errorMsg.servicesId}">
+          <v-alert v-if="servicesDescription" color="primary" text :class="{'mt-4': !!errorMsg.sbuId}">
             {{ servicesDescription }}
           </v-alert>
 				</v-col>
-					<v-col cols="12" md="6">
-						<v-text-field persistent-hint
-							:disabled="loading"
-							label="Phone Number"
-							placeholder="0816234xxx"
-							v-model="row.phone"
-							:error-messages="errorMsg.phone"
-							hint="Enter phone number that can be contacted"
-						></v-text-field>
-					</v-col>
+				<v-col cols="12" md="6">
+					<v-autocomplete
+						:disabled="loading"
+						label="Branch"
+						placeholder="Search Branch"
+						v-model="row.BranchId"
+						:items="branchOptions"
+						:error-messages="errorMsg.BranchId"
+					></v-autocomplete></v-col>
 				</v-row>
 			</template>
 
@@ -138,6 +138,10 @@
 
 		  <v-alert v-if="hcCategory12" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
            DOWNLOAD FORM : <br><a href="uploader/master_file/FORM_ON_OFF_BOARDING.xlsx"><img src="https://img.icons8.com/?size=1x&id=8Q0JnVzEzZWf&format=png"></img></a>
+          </v-alert>
+
+		  <v-alert v-if="hcCategory13" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
+           DOWNLOAD FORM : <br><a href="uploader/master_file/Pengajuan_Removable_Media.docx"><img src="https://img.icons8.com/?size=1x&id=13624&format=png"></img></a>
           </v-alert>
 
 				</v-col>
@@ -243,10 +247,12 @@ export default {
 			row: {
 				email: '',
 				nik: '',
-				phone: '',
+				company_branch_id: '',
 				subject: '',
 				ticketDescr: '',
 				servicesId: '',
+				sbuId: '',
+				BranchId: '',
 				categoryId: '',
 				categorySubId: '',
 				network: '',
@@ -254,15 +260,18 @@ export default {
 			errorMsg: {
 				email: '',
 				nik: '',
-				phone: '',
+				company_branch_id: '',
 				subject: '',
 				ticketDescr: '',
 				servicesId: '',
+				sbuId: '',
+				BranchId: '',
 				categoryId: '',
 				categorySubId: '',
 				network: '',
 			},
 			sbuOptions: [],
+			branchOptions: [],
 			servicesOptions: [],
 			categoryOptions: [],
 			categoryOptions: [],
@@ -377,7 +386,22 @@ export default {
       }
     },
 
+	hcCategory13() {
+      const find = _.find(this.categorySubOptions, {value: this.row.categorySubId})
+      if (find) {
+		if (find.text.includes("Pengajuan Removable Media")) {
+        return find.text;}
+      }
+    },
+
 	
+	sbuDescription() {
+      const find = _.find(this.sbuOptions, {value: this.row.sbuId})
+      if (find) {
+        return find.description;
+      }
+    },
+
 	servicesDescription() {
       const find = _.find(this.servicesOptions, {value: this.row.servicesId})
       if (find) {
@@ -441,6 +465,8 @@ export default {
 				subject: '',
 				ticketDescr: '',
 				servicesId: '',
+				BranchId: '',
+				sbuId: '',
 				categoryId: '',
 				categorySubId: '',
 				network: '',
@@ -471,6 +497,24 @@ export default {
 					this.$coresnackbars.error(data.message);
 				} else {
 					this.servicesOptions = data.rows;
+				}
+			}).catch((error) => {
+					console.log(error);
+					const { statusText, data } = error;
+					this.$coresnackbars.error(statusText);
+			});
+		},
+		fetchBranch() {
+			this.branchOptions = [];
+			this.$axios.get('request-ticket/branch', {
+				params: {parent_id: this.row.sbuId}
+			})
+				.then(response => {
+				const {data} = response;
+				if (!data.success) {
+					this.$coresnackbars.error(data.message);
+				} else {
+					this.branchOptions = data.rows;
 				}
 			}).catch((error) => {
 					console.log(error);
@@ -548,8 +592,8 @@ export default {
 			
 			const formItem = new FormData();
 			formItem.set('email', this.row.email);
-			formItem.set('company_id', this.row.sbuid);
-			formItem.set('phone', this.row.phone);
+			formItem.set('sbuId', this.row.sbuId);
+			formItem.set('BranchId', this.row.BranchId);
 			formItem.set('subject', this.row.subject);
 			formItem.set('servicesId', this.row.servicesId);
 			formItem.set('categoryId', this.row.categoryId);

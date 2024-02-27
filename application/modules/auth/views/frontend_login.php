@@ -35,15 +35,15 @@
 								label="<?php echo lang('auth::password'); ?>"
 								placeholder="<?php echo lang('auth::password_placeholder'); ?>"
 							></v-text-field>
-
-							<v-checkbox
+							<div style="display: none">"		
+							 <v-checkbox
 								class="blue-grey--text text--darken-4 mt-0"
 								color="success"
 								v-model="rememberMe"
 								label="<?php echo lang('auth::remember_me') ?>"
 							></v-checkbox>
 
-							<input type="hidden" name="remember_me" value="0" ref="rememberMe" />
+							<input type="hidden" name="remember_me" value="0" ref="rememberMe" /> </div>
 
 							<?php 
 							echo form_hidden($csrf); 

@@ -54,6 +54,7 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['api/request-ticket/sbu'] = 'tickets/request_ticket/sbu';
+$route['api/request-ticket/branch'] = 'tickets/request_ticket/branch';
 $route['api/request-ticket/category'] = 'tickets/request_ticket/category';
 $route['api/request-ticket/email'] = 'tickets/request_ticket/email';
 $route['api/request-ticket/services'] = 'tickets/request_ticket/services';

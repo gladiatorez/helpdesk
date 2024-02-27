@@ -17,11 +17,21 @@ class Backend_reports_widget_api extends Backend_Api_Controller
     public function form_options()
     {
         $this->load->model('references/category_model');
+        if (isUserAdmin() || isUserHelpdesk() ) {
         $categories = $this->category_model->fields('id,name')
             ->as_array()
-            ->order_by('parent_id', 'ASC')
+            ->order_by('name', 'ASC')
             ->with('child', ['fields:id,name'])
             ->get_all(['active' => 'A', 'parent_id' => '0']);
+        }else{
+            $categories = $this->category_model->fields('id,name')
+            ->as_array()
+            ->order_by('name', 'ASC')
+            ->with('child', ['fields:id,name'])
+            ->get_all(['active' => 'A', 'parent_id' => '0', 'id <>' => '285']);
+
+        }
+
         if (!$categories) {
             $this->template->build_json([]);
             return false;

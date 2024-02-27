@@ -107,6 +107,34 @@ class Request_ticket extends Public_Controller
         ]);
     }
 
+    public function branch()
+    {
+        $this->output->enable_profiler(false);
+        $this->template->set_layout(false);
+
+        $sbuid = $this->input->get('parent_id');
+
+        $this->load->model('references/company_branch_model');
+        $branch = $this->company_branch_model
+            ->order_by('name')
+            ->get_all(['active' => 'A', 'company_id' => $sbuid]);
+        $branchOptions = [];
+        if ($branch) {
+            foreach ($branch as $branch) {
+                $branchOptions[] = [
+                    'value' => $branch->id,
+                    'text' => $branch->name,
+                    'description' => $branch->name,
+                ];
+            }
+        }
+
+        $this->template->build_json([
+            'success' => true,
+            'rows' => $branchOptions
+        ]);
+    }
+
     
     public function category()
     {
@@ -269,6 +297,8 @@ class Request_ticket extends Public_Controller
 
         if (!frontendIsLoggedIn()) {
             $this->form_validation->set_rules('email', 'lang:tickets::lb:email', 'trim|required|max_length[100]|valid_email|callback__check_email');
+            $this->form_validation->set_rules('sbuId', 'lang:tickets::lb:sbuId', 'trim|required');
+            $this->form_validation->set_rules('BranchId', 'lang:tickets::lb:BranchId', 'trim|required');
         }
         $this->form_validation->set_rules('subject', 'lang:tickets::lb:subject', 'trim|required|max_length[100]');
         $this->form_validation->set_rules('servicesId', 'lang:tickets::lb:services', 'trim|required');
@@ -278,8 +308,8 @@ class Request_ticket extends Public_Controller
         if ($this->form_validation->run()) 
         {
             $filesCount = (int)$this->input->post('fileCount');
-            $sbu = $this->input->post('company_id');
-            $phone = $this->input->post('phone');
+            $sbu = $this->input->post('sbuId');
+            $company_branch_id = $this->input->post('BranchId');
             
             $dataTicket = array(
                 'subject' => $this->input->post('subject'),
@@ -296,7 +326,7 @@ class Request_ticket extends Public_Controller
             }
 
             $this->load->library('tickets/the_tickets');
-            $requestTicket = $this->the_tickets->requestTicket($dataTicket, $email, true, $filesCount, $sbu, $phone);
+            $requestTicket = $this->the_tickets->requestTicket($dataTicket, $email, true, $filesCount, $sbu, $company_branch_id);
             if ($requestTicket) {
                 $this->the_tickets->ticketPosting($requestTicket);
                 $this->template->build_json([
@@ -318,6 +348,50 @@ class Request_ticket extends Public_Controller
                 'message' => $this->form_validation->error_array()
             ]);
         }
+    }
+
+
+    public function sendBot()
+    {
+        $this->output->enable_profiler(false);
+        $this->template->set_layout(false);
+
+       
+            $filesCount = (int)$this->input->post('fileCount');
+            $sbu = $this->input->post('sbuId');
+            $company_branch_id = $this->input->post('BranchId');
+            $email = $this->input->post('email', true);
+            
+            $dataTicket = array(
+                'subject' => $this->input->post('subject'),
+                'description' => $this->input->post('ticketDescr', true),
+                'services_id' => $this->input->post('servicesId'),
+                'category_id' => $this->input->post('categoryId'),
+                'category_sub_id' => $this->input->post('categorySubId'),
+                'network' => $this->input->post('network'),
+            );
+
+            
+         
+
+            $this->load->library('tickets/the_tickets');
+            $requestTicket = $this->the_tickets->requestTicket($dataTicket, $email, true, $filesCount, $sbu, $company_branch_id);
+            if ($requestTicket) {
+                $this->the_tickets->ticketPosting($requestTicket);
+                $this->template->build_json([
+                    'success' => true,
+                    'message' => $this->the_tickets->getMessages()
+                ]);
+            } else {
+                $this->output->set_status_header('400', $this->the_tickets->getErrors());
+                $this->template->build_json([
+                    'success' => false,
+                    'message' => $this->the_tickets->getErrors()
+                ]);
+            }
+            
+           
+        echo $requestTicket;
     }
 
     public function _check_email($email = '')

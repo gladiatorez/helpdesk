@@ -307,7 +307,8 @@ class Personal_info_api extends Informer_Api_Controller
             ]);
             return false;
         }
-
+        
+        
         $this->load->model('informer/informer_view_model');
         $informer = $this->informer_view_model->fields('id,user_id')
             ->get(['user_id' => $userId]);
