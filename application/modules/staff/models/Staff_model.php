@@ -193,6 +193,15 @@ class Staff_model extends MY_Model
 
     public function create($data)
     {
+        $email = $data['email'];
+        $this->db->select('id');
+        $this->db->where('email', $email);
+        $query = $this->db->get('uf_user_users');
+        $result = $query->row();
+
+        if (!$result) {
+           
+        
         if (!array_key_exists('full_name', $data) || !array_key_exists('nik', $data) || 
             !array_key_exists('phone', $data) || !array_key_exists('position', $data) || 
             !array_key_exists('pic_level_id', $data) || !array_key_exists('email', $data) || 
@@ -232,12 +241,11 @@ class Staff_model extends MY_Model
             'en',
             $data['active']
         );
+
         if (!$register) {
             $this->_database->trans_rollback();
-            return [
-                'success' => false,
-                'message' => $this->the_auth_backend->getMessageStr()
-            ];
+                        
+            
         }
 
         if ($group->send_ticket > 0) {
@@ -273,15 +281,100 @@ class Staff_model extends MY_Model
             ];
         }
 
+       
+     } else{
+        $this->edit2($result->id, $data);
+        }
+
         return [
             'success' => true,
             'message' => lang('msg::saving_success'),
-            'user_id' => $register
+            'user_id' => $result->id
         ];
     }
 
+
+
+
+    public function edit2($id, $data)
+    {
+    
+        if (!array_key_exists('full_name', $data) || !array_key_exists('nik', $data) ||
+            !array_key_exists('phone', $data) || !array_key_exists('position', $data) ||
+            !array_key_exists('pic_level_id', $data) || !array_key_exists('email', $data) ||
+            !array_key_exists('company_id', $data) || !array_key_exists('active', $data) ||
+            !array_key_exists('group_id', $data)) {
+            return [
+                'success' => false,
+                'message' => lang('msg::saving_failed')
+            ];
+        }
+
+        // get staff
+        $staff = $this->get(['user_id' => $id]);
+        if (!$staff) {
+            $this->closure_table->add([
+                'user_id' => $id,
+                'parent_id' => null,
+                'pic_level_id' => $data['pic_level_id']
+            ]);
+        }else{
+             // update staff
+        $dataStaff = [
+            'parent_id' => null,
+            'pic_level_id' => $data['pic_level_id']
+        ];
+
+            $this->closure_table->update($id, $dataStaff, false);
+
+        }
+
+        $this->_database->trans_start();
+
+        // update user
+        $this->user_model->update([
+            'email' => $data['email'],
+            'active' => $data['active'],
+            'company_id' => $data['company_id'],
+            'group_id'  => $data['group_id']
+        ], ['id' => $id]);
+
+
+        $prof = $this->profile_model->fields('user_id')->get(['user_id' => $id]);
+        if (!$prof) {
+            $this->profile_model->insert([
+                'full_name' => $data['full_name'],
+                'nik' => $data['nik'],
+                'phone' => $data['phone'],
+                'position' => $data['position'],
+                'user_id' => $id]);
+        }else{
+        // update profile
+        $this->profile_model->update([
+            'full_name' => $data['full_name'],
+            'nik' => $data['nik'],
+            'phone' => $data['phone'],
+            'position' => $data['position']
+        ], ['user_id' => $id]);
+        }
+
+      //echo  $this->_database->last_query();die();
+        
+        $this->_database->trans_complete();
+       
+
+        return [
+            'success' => true,
+            'message' => lang('msg::saving_success'),
+            'user_id' => $id
+        ];
+    }
+
+
+
     public function edit($id, $data)
     {
+    
         if (!array_key_exists('full_name', $data) || !array_key_exists('nik', $data) ||
             !array_key_exists('phone', $data) || !array_key_exists('position', $data) ||
             !array_key_exists('pic_level_id', $data) || !array_key_exists('email', $data) ||

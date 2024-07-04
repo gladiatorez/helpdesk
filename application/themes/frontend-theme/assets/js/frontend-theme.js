@@ -10,6 +10,8 @@ import RateForm from './components/RateForm.vue';
 import WhatsAppBtn from "./components/WhatsAppBtn.vue";
 import TelegramBtn from "./components/TelegramBtn.vue";
 
+
+
 Vue.component('core-logo', Logo);
 Vue.component('core-logo', Logo);
 Vue.component('hero-particle', HeroParticle);

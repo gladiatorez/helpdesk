@@ -76,6 +76,7 @@
           <v-alert v-if="categoryDescription" color="primary" text :class="{'mt-4': !!errorMsg.categoryId}">
             {{ categoryDescription }}
           </v-alert>
+		  
 		  <v-alert v-if="hcCategory" color="primary" text :class="{'mt-4': !!errorMsg.categoryId}">
            DOWNLOAD FORM : <br><a href="uploader/master_file/FORM_REQUEST_FULFILLMENT.xlsx"><img src="https://img.icons8.com/?size=1x&id=8Q0JnVzEzZWf&format=png"></img></a>
           </v-alert>
@@ -142,6 +143,18 @@
 
 		  <v-alert v-if="hcCategory13" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
            DOWNLOAD FORM : <br><a href="uploader/master_file/Pengajuan_Removable_Media.docx"><img src="https://img.icons8.com/?size=1x&id=13624&format=png"></img></a>
+          </v-alert>
+
+		  <v-alert v-if="hcCategory14" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
+           DOWNLOAD FORM : <br><a href="uploader/master_file/Template_Surat_Permintaan_Shared_Mailboxes_Nama_Unit_Kerja.docx"><img src="https://img.icons8.com/?size=1x&id=13624&format=png"></img></a>
+          </v-alert>
+
+		  <v-alert v-if="hcCategory15" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
+           DOWNLOAD FORM : <br><a href="uploader/master_file/Form_Pengajuan_Akun(INTERNET&ORACEL).xlsx"><img src="https://img.icons8.com/?size=1x&id=8Q0JnVzEzZWf&format=png"></img></a>
+          </v-alert>
+
+		  <v-alert v-if="hcCategory16" color="primary" text :class="{'mt-4': !!errorMsg.categorySubId}">
+           DOWNLOAD FORM : <br><a href="uploader/master_file/Form_Pengajuan_Akun(INTERNET&ORACEL).xlsx"><img src="https://img.icons8.com/?size=1x&id=8Q0JnVzEzZWf&format=png"></img></a>
           </v-alert>
 
 				</v-col>
@@ -390,6 +403,30 @@ export default {
       const find = _.find(this.categorySubOptions, {value: this.row.categorySubId})
       if (find) {
 		if (find.text.includes("Pengajuan Removable Media")) {
+        return find.text;}
+      }
+    },
+	
+	hcCategory14() {
+      const find = _.find(this.categorySubOptions, {value: this.row.categorySubId})
+      if (find) {
+		if (find.text.includes("Pembuatan Shared Mailbox (Department, Unit Kerja, Cabang, Project,dsb)")) {
+        return find.text;}
+      }
+    },
+
+	hcCategory15() {
+      const find = _.find(this.categorySubOptions, {value: this.row.categorySubId})
+      if (find) {
+		if (find.text.includes("New akun login internet")) {
+        return find.text;}
+      }
+    },
+
+	hcCategory16() {
+      const find = _.find(this.categorySubOptions, {value: this.row.categorySubId})
+      if (find) {
+		if (find.text.includes("Disable akun login internet")) {
         return find.text;}
       }
     },

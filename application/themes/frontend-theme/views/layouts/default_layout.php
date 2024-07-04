@@ -21,7 +21,7 @@
 
             <div class="sticky-chatmedia pa-2 elevation-1">
                 <div class="sticky-chatmedia--title">Chat Us</div>
-                <whats-app-btn rounded depressed hide-text href="https://api.whatsapp.com/send/?phone=6281355334442&text=Assallamu%20allaikum%20wr.%20wb.%20&app_absent=0" target="_blank"></whats-app-btn>
+                <whats-app-btn rounded depressed hide-text href="https://api.whatsapp.com/send/?phone=6282344445068&text=Assallamu%20allaikum%20wr.%20wb.%20&app_absent=0" target="_blank"></whats-app-btn>
                 <telegram-btn rounded depressed hide-text href="https://t.me/Helpdesk_kallagroup" target="_blank"></telegram-btn>
             </div>
         </v-app>
